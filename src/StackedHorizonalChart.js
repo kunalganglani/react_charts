@@ -55,7 +55,7 @@ class StackedHorizonalChart extends Component {
                     };
                 });
             }),
-            stack = d3.layout.stack();
+            stack = d3.stack();
 
         stack(dataset);
 
@@ -80,23 +80,22 @@ class StackedHorizonalChart extends Component {
                     return d.x + d.x0;
                 });
             }),
-            xScale = d3.scale.linear()
+            xScale = d3.scaleLinear()
                 .domain([0, xMax])
                 .range([0, width]),
             months = dataset[0].map(function (d) {
                 return d.y;
             }),
             _ = console.log(months),
-            yScale = d3.scale.ordinal()
+            yScale = d3.scaleBand()
                 .domain(months)
-                .rangeRoundBands([0, height], .1),
-            xAxis = d3.svg.axis()
-                .scale(xScale).ticks(5).tickSize(-70, 0)
-                .orient('bottom'),
-            yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient('left'),
-            colours = d3.scale.category10(),
+                .rangeRound([0, height])
+                .padding(0.1),
+            xAxis = d3.axisBottom()
+                .scale(xScale).ticks(5).tickSize(-70, 0),
+            yAxis = d3.axisLeft()
+                .scale(yScale),
+            colours = d3.scaleOrdinal(d3.schemeCategory10),
             groups = svg.selectAll('g')
                 .data(dataset)
                 .enter()
@@ -117,7 +116,8 @@ class StackedHorizonalChart extends Component {
                     return yScale(d.y);
                 })
                 .attr('height', function (d) {
-                    return yScale.rangeBand();
+                    // return yScale.rangeBand();
+                    return yScale.bandwidth();
                 })
                 .attr('width', function (d) {
                     return xScale(d.x);
