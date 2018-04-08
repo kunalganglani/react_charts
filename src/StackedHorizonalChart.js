@@ -55,7 +55,7 @@ class StackedHorizonalChart extends Component {
                     };
                 });
             }),
-            stack = d3.stack();
+            stack = d3.layout.stack();
 
         stack(dataset);
 
@@ -80,31 +80,23 @@ class StackedHorizonalChart extends Component {
                     return d.x + d.x0;
                 });
             }),
-            xScale = d3.scaleLinear()
+            xScale = d3.scale.linear()
                 .domain([0, xMax])
                 .range([0, width]),
             months = dataset[0].map(function (d) {
                 return d.y;
             }),
             _ = console.log(months),
-            yScale = d3.scaleBand()
+            yScale = d3.scale.ordinal()
                 .domain(months)
-                .rangeRound([0, height])
-                .padding(0.1),
-            // .rangeRoundBands([0, height], .1),
-            // d3.axisBottom()
-            // .scale(scale)
-            // .ticks(2, ",f")
-            // .tickSize(-height + 2 * margin + axisMargin)
-            xAxis = d3.axisBottom()
-                .scale(xScale)
-                .ticks(5).tickSize(-70, 0)
-            // .orient('bottom')
-            ,
-            yAxis = d3.axisLeft()
-                .scale(yScale),
-            // .orient('left'),
-            colours = d3.scaleOrdinal(d3.schemeCategory10),
+                .rangeRoundBands([0, height], .1),
+            xAxis = d3.svg.axis()
+                .scale(xScale).ticks(5).tickSize(-70, 0)
+                .orient('bottom'),
+            yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient('left'),
+            colours = d3.scale.category10(),
             groups = svg.selectAll('g')
                 .data(dataset)
                 .enter()
@@ -125,8 +117,7 @@ class StackedHorizonalChart extends Component {
                     return yScale(d.y);
                 })
                 .attr('height', function (d) {
-                    // return yScale.rangeBand();
-                    return yScale.range();
+                    return yScale.rangeBand();
                 })
                 .attr('width', function (d) {
                     return xScale(d.x);
