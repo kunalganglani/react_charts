@@ -55,7 +55,7 @@ class HorizontalChart extends Component {
 
         xAxis = d3.axisBottom()
             .scale(scale)
-            .ticks(2, ",f")
+            .ticks(2, ",f") 
             .tickSize(-height + 2 * margin + axisMargin)
         //.orient("bottom");
 

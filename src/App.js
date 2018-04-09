@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import StackedHorizonalChart from './StackedHorizonalChart';
+
+// import StackedHorizonalChart from './StackedHorizonalChart';
+import StackedHorizonalBarChart from './StackedHorizontalBarChart';
 // import HorizontalChart from './HorizontalChart';
 // import Barchart from './Barchart';
 
@@ -27,8 +29,8 @@ class App extends Component {
             { label: "Category 6", value: 27 }
           ]} chartContainer="hchart" />
         </div> */}
-        <StackedHorizonalChart/>
-
+        {/* <StackedHorizonalChart/> */}
+        <StackedHorizonalBarChart/>
       </div>
     );
   }
