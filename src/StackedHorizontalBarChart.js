@@ -17,8 +17,9 @@ class StackedHorizonalBarChart extends Component {
                 let me = this,
                     domEle = config.element,
                     stackKey = config.key,
-                    data = config.data,
-                    margin = {
+                    data = config.data;
+                // console.log(data);
+                let margin = {
                         top: 20,
                         right: 20,
                         bottom: 30,
@@ -111,7 +112,8 @@ class StackedHorizonalBarChart extends Component {
                             .style("left", xPos + "px")
                             .style("top", yPos + "px")
                             .select("#value")
-                            .text(data[1] - data[0])
+                            .html(data.data.date +"<br>"
+                                +"Tickers:"+ (data[1] - data[0]))
 
                         d3.select("#tooltip").classed("hidden", false);
                     })
