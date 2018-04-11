@@ -1,12 +1,4 @@
-.chartContainer{
-  overflow: auto;
-  height: 15em;
-}
 
-svg {
-    width: 100%;
-    position: center;
-  }
   
   .toolTip {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

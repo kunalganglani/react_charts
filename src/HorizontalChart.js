@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import './chart.css';
+// import './chart.css';
 class HorizontalChart extends Component {
     // render(){
     //     return <div>sdf</div>
