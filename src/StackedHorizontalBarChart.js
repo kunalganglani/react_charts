@@ -26,8 +26,7 @@ class StackedHorizonalBarChart extends Component {
     </p>`);
         var initStackedBarChart = {
             draw: function (config) {
-                let domEle = node,//config.element,
-                    stackKey = config.key,
+                let stackKey = config.key,
                     data = config.data;
                 let margin = {
                     top: 20,
@@ -35,7 +34,7 @@ class StackedHorizonalBarChart extends Component {
                     bottom: 30,
                     left: 50
                 },
-                    width = 960 - margin.left - margin.right,
+                    width = 560 - margin.left - margin.right,
                     height = 460 - margin.top - margin.bottom,
                     xScale = d3.scaleLinear().rangeRound([0, width]),
                     yScale = d3
@@ -144,21 +143,7 @@ class StackedHorizonalBarChart extends Component {
                     .call(yAxis);
             }
         };
-        var data = [{
-            date: "Apple",
-            total: 800000,
-            tickerNotSent: 1,
-            other: 0,
-            tickerSent: 5
-        },
-        {
-            date: "Orange",
-            total: 10000,
-            tickerNotSent: 1,
-            other: 0,
-            tickerSent: 9
-        }
-        ];
+        var data = this.props.data; 
         var key = ["other", "tickerSent", "tickerNotSent"];
         initStackedBarChart.draw({
             data: data,

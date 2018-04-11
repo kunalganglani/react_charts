@@ -4,7 +4,7 @@ import './App.css';
 
 // import StackedHorizonalChart from './StackedHorizonalChart';
 import StackedHorizonalBarChart from './StackedHorizontalBarChart';
-// import HorizontalChart from './HorizontalChart';
+import HorizontalChart from './HorizontalChart';
 import Barchart from './Barchart';
 
 class App extends Component {
@@ -29,8 +29,26 @@ class App extends Component {
             { label: "Category 6", value: 27 }
           ]} chartContainer="hchart" />
         </div> */}
+        {/* <HorizontalChart/> */}
         {/* <StackedHorizonalChart/> */}
-        <StackedHorizonalBarChart/>
+        <div className="chartContainer">
+        <StackedHorizonalBarChart data={[{
+            date: "Apple",
+            total: 800000,
+            tickerNotSent: 1,
+            other: 0,
+            tickerSent: 5
+        },
+        {
+            date: "Orange",
+            total: 10000,
+            tickerNotSent: 1,
+            other: 0,
+            tickerSent: 9
+        }
+        ]
+        }/>
+        </div>
       </div>
     );
   }

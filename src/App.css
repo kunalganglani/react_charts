@@ -27,3 +27,8 @@
   to { transform: rotate(360deg); }
 }
 
+.chartContainer{
+  overflow-y: scroll;
+  height: 20em;
+  width: 40em;
+}
