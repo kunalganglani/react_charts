@@ -32,22 +32,20 @@ class App extends Component {
         {/* <HorizontalChart/> */}
         {/* <StackedHorizonalChart/> */}
         <div className="chartContainer">
-        <StackedHorizonalBarChart data={[{
-            date: "Apple",
-            total: 800000,
-            tickerNotSent: 1,
-            other: 0,
-            tickerSent: 5
-        },
-        {
-            date: "Orange",
-            total: 10000,
-            tickerNotSent: 1,
-            other: 0,
-            tickerSent: 9
-        }
-        ]
-        }/>
+          <StackedHorizonalBarChart 
+          data={
+            [
+            // {date: "COMMERCE BANK",total: 8, tickerNotSent: 2,tickerSent: 3, tickerSentPercent: 10, tickerNotSentPercent: 25 },
+            // {date: "MORGAN STANLEY",total: 10, tickerNotSent: 2,tickerSent: 3, tickerSentPercent: 10, tickerNotSentPercent: 25 },
+            
+            {date: "COMMERCE BANK",total: 8, tickerNotSent: 2,tickerSent: 3, tickerSentPercent: 37.5, tickerNotSentPercent: 25 },
+            {date: "GRANTHAM, MAYO, VAN OTTERLOO",total: 23,tickerNotSent: 12,tickerSent: 9, tickerSentPercent: 8, tickerNotSentPercent: 10},
+            {date: "GOLDMAN SACHS",total: 37,tickerNotSent: 10,tickerSent: 27, tickerSentPercent: 8, tickerNotSentPercent: 10},
+            {date: "JP MORGAN",total: 40,tickerNotSent: 20,tickerSent: 15, tickerSentPercent: 8, tickerNotSentPercent: 10},
+            {date: "MORGAN STANLEY",total: 52,tickerNotSent: 12,tickerSent: 40, tickerSentPercent: 8, tickerNotSentPercent: 10},
+            {date: "GOLDMAN SACHS",total: 60,tickerNotSent: 40,tickerSent: 9, tickerSentPercent: 8, tickerNotSentPercent: 10}
+            ]
+          } />
         </div>
       </div>
     );

@@ -27,10 +27,9 @@
 
 #tooltip {
   position: absolute;
-  text-align: center;
   width: auto;
   height: auto;
-  padding: 10px;
+  padding: 8px;
   background-color: white;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -48,8 +47,8 @@
 #tooltip p {
   margin: 0;
   font-family: sans-serif;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 14px;
 }
 
 rect {

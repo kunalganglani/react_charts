@@ -31,11 +31,11 @@ class StackedHorizonalBarChart extends Component {
                 let margin = {
                     top: 20,
                     right: 20,
-                    bottom: 30,
-                    left: 50
+                    bottom: 90,
+                    left: 240
                 },
                     width = 560 - margin.left - margin.right,
-                    height = 460 - margin.top - margin.bottom,
+                    height =  data.length*30,//460 - margin.top - margin.bottom,
                     xScale = d3.scaleLinear().rangeRound([0, width]),
                     yScale = d3
                         .scaleBand()
@@ -78,7 +78,6 @@ class StackedHorizonalBarChart extends Component {
                         })
                     ])
                     .nice();
-                var dynamicColor;
                 var layer = svg
                     .selectAll(".layer")
                     .data(layers)
@@ -113,15 +112,29 @@ class StackedHorizonalBarChart extends Component {
                         var xPos = d3.event.pageX + 10;
                         var yPos = d3.event.pageY - 25;
                         // parseFloat(d3.select(this).attr("y")) + yScale.bandwidth() / 2;
-
-                        d3
+                        if (data[0] === 0){
+                            d3
                             .select("#tooltip")
                             .style("left", xPos + "px")
                             .style("top", yPos + "px")
                             .select("#value")
-                            .html(data.data.date + "<br>"
-                                + "Tickers:" + (data[1] - data[0]))
+                            .html('Client Name: '+ data.data.date + "<br>"
+                                + "%Complete: " + data.data.tickerSentPercent + "<br>"
+                                + "Tickers Sent :" + data.data.tickerSent + " of "+ data.data.total)
 
+                        } else{
+                            d3
+                            .select("#tooltip")
+                            .style("left", xPos + "px")
+                            .style("top", yPos + "px")
+                            .select("#value")
+                            .html('Client Name: '+ data.data.date + "<br>"
+                                + "%Complete: " + data.data.tickerNotSentPercent + "<br>" //().toFixed(2)
+                                + "Tickers Sent :" + data.data.tickerNotSent + " of "+ data.data.total)
+
+                        }
+
+                        
                         d3.select("#tooltip").classed("hidden", false);
                     })
 
@@ -141,10 +154,29 @@ class StackedHorizonalBarChart extends Component {
                     .attr("class", "axis axis--y")
                     .attr("transform", "translate(0,0)")
                     .call(yAxis);
+                
+                svg
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin.left+2)
+                    .attr("x",0 - (height / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("Companies");
+                
+                // text label for the x axis
+                svg
+                    .append("text")             
+                    .attr("transform",
+                    "translate(" + (width/2) + " ," + 
+                    (height + margin.top + 20) + ")")
+                    .style("text-anchor", "middle")
+                    .text("% Complete");
+
             }
         };
         var data = this.props.data; 
-        var key = ["other", "tickerSent", "tickerNotSent"];
+        var key = ["tickerSentPercent", "tickerNotSentPercent"];
         initStackedBarChart.draw({
             data: data,
             key: key
