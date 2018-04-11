@@ -5,7 +5,7 @@ import './App.css';
 // import StackedHorizonalChart from './StackedHorizonalChart';
 import StackedHorizonalBarChart from './StackedHorizontalBarChart';
 // import HorizontalChart from './HorizontalChart';
-// import Barchart from './Barchart';
+import Barchart from './Barchart';
 
 class App extends Component {
   render() {

@@ -4,27 +4,37 @@ import React, {
 import * as d3 from 'd3';
 import './stackedHorizontalBarChart.css';
 class StackedHorizonalBarChart extends Component {
-    render() {
+    constructor(props) {
+        super(props)
+        this.createBarChart = this.createBarChart.bind(this)
+    }
+    componentDidMount() {
+        this.createBarChart()
+    }
+    componentDidUpdate() {
+        this.createBarChart()
+    }
+    createBarChart() {
+        const node = this.node
+        
         d3
             .select("body")
             .append("div")
             .attr("id", "tooltip")
             .attr("class", "hidden").html(`
-        <p><span id="value">100</span>
-        </p>`);
+    <p><span id="value">100</span>
+    </p>`);
         var initStackedBarChart = {
             draw: function (config) {
-                let me = this,
-                    domEle = config.element,
+                let domEle = node,//config.element,
                     stackKey = config.key,
                     data = config.data;
-                // console.log(data);
                 let margin = {
-                        top: 20,
-                        right: 20,
-                        bottom: 30,
-                        left: 50
-                    },
+                    top: 20,
+                    right: 20,
+                    bottom: 30,
+                    left: 50
+                },
                     width = 960 - margin.left - margin.right,
                     height = 460 - margin.top - margin.bottom,
                     xScale = d3.scaleLinear().rangeRound([0, width]),
@@ -37,9 +47,7 @@ class StackedHorizonalBarChart extends Component {
                         .tickSize(-height, 0),
                     yAxis = d3.axisLeft(yScale), //.tickFormat(d3.timeFormat("%b")),
                     svg = d3
-                        .select("body")
-                        // .select("#" + domEle)
-                        .append("svg")
+                        .select(node)
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
                         .append("g")
@@ -105,15 +113,15 @@ class StackedHorizonalBarChart extends Component {
                         // var xPos = parseFloat(d3.select(this).attr("x"));
                         var xPos = d3.event.pageX + 10;
                         var yPos = d3.event.pageY - 25;
-                            // parseFloat(d3.select(this).attr("y")) + yScale.bandwidth() / 2;
+                        // parseFloat(d3.select(this).attr("y")) + yScale.bandwidth() / 2;
 
                         d3
                             .select("#tooltip")
                             .style("left", xPos + "px")
                             .style("top", yPos + "px")
                             .select("#value")
-                            .html(data.data.date +"<br>"
-                                +"Tickers:"+ (data[1] - data[0]))
+                            .html(data.data.date + "<br>"
+                                + "Tickers:" + (data[1] - data[0]))
 
                         d3.select("#tooltip").classed("hidden", false);
                     })
@@ -154,12 +162,15 @@ class StackedHorizonalBarChart extends Component {
         var key = ["other", "tickerSent", "tickerNotSent"];
         initStackedBarChart.draw({
             data: data,
-            key: key,
-            element: "stacked-bar"
+            key: key
         });
-        return <p> sdf </p>;
+
+    }
+    render() {
+        return <svg ref={node => this.node = node}
+            width={500} height={500}>
+        </svg>
     }
 
 }
-
-export default StackedHorizonalBarChart;
+    export default StackedHorizonalBarChart;

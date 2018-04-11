@@ -20,7 +20,8 @@
         const dataMax = max(this.props.data)
         const yScale = scaleLinear()
            .domain([0, dataMax])
-           .range([0, this.props.size[1]])
+           .range([0, this.props.size[1]]);
+           debugger;
      select(node)
         .selectAll('rect')
         .data(this.props.data)
@@ -43,7 +44,7 @@
         .attr('width', 25)
      }
   render() {
-        return <svg transform='rotate(90)' ref={node => this.node = node}
+        return <svg ref={node => this.node = node}
         width={500} height={500}>
         </svg>
      }
