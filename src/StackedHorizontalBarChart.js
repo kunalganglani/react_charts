@@ -152,8 +152,7 @@ class StackedHorizonalBarChart extends Component {
 
     }
     render() {
-        return <svg ref={node => this.node = node}
-            width={500} height={500}>
+        return <svg ref={node => this.node = node}>
         </svg>
     }
 
